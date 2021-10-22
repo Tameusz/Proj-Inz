@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"/>
 
                 <Button
+                    android:id="@+id/buttonRecognizerDetailsConfirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -55,6 +56,7 @@
                     android:textStyle="bold"/>
 
                 <Button
+                    android:id="@+id/buttonRecognizerDetailsToRecognizer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Powrót do Rejestratora tekstu"

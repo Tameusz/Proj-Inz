@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/helpButton"
+        style="@style/SelectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/question"
+        android:title="Pomoc"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/barcodeButton"
+        style="@style/SelectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/barcode"
+        android:title="Przejdź do czytnika kodów"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/recognizerButton"
+        style="@style/SelectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ocr"
+        android:title="Przejdź do rozpoznawania tekstu"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/cartButton"
+        style="@style/SelectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/shopping_cart"
+        app:showAsAction="always"
+        android:title="Przejdź do wózka" />
+
+    <item
+        android:id="@+id/cartDetailsButton"
+        style="@style/SelectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/kcal"
+        android:title="Przejdź do wartości odżywczych"
+        app:showAsAction="always" />
+</menu>

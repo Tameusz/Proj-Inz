@@ -11,22 +11,22 @@
         android:theme="@style/Theme.ProjInz">
         <activity
             android:name=".BarcodeReaderErrorActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".TextRecognizerActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".BarcodeReaderDetailsActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".BarcodeReaderActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".CartDetailsActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".CartActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".QuestionsActivity"
             android:exported="true">
@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"/>
     </application>
 
 </manifest>
