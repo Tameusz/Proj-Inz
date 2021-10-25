@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".TextRecognizerDetailsActivity"
+    android:gravity="center"
+    tools:context=".CartActivity"
+    android:padding="16dp"
     android:background="@drawable/background_blue">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="match_parent"
         app:cardCornerRadius="8dp"
         app:cardElevation="50dp">
 
@@ -28,38 +28,35 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Oto co udało mi się znaleźć"
+                    android:text="Oto twój wózek"
                     android:gravity="center"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dane o produkcie"/>
+                    android:text="Produkty w wózku"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ile gramów produktu kupujesz?"
-                    android:gravity="center"
-                    android:textStyle="bold"/>
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/eText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
 
                 <Button
-                    android:id="@+id/buttonRecognizerDetailsConfirm"
+                    android:id="@+id/cartToCartDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Zatwierdź"
+                    android:text="Przejdź wartości odżywczych"
                     android:textStyle="bold"/>
 
                 <Button
-                    android:id="@+id/buttonRecognizerDetailsToRecognizer"
+                    android:id="@+id/cartToBarcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Powrót do Rejestratora tekstu"
+                    android:text="Przejdź do czytnika kodów"
+                    android:textStyle="bold"/>
+
+
+                <Button
+                    android:id="@+id/cartToRecognizer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Przejdź do rozpoznawania tekstu"
                     android:textStyle="bold"/>
 
             </LinearLayout>

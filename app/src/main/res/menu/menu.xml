@@ -4,15 +4,20 @@
 
     <item
         android:id="@+id/helpButton"
-        style="@style/SelectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/question"
         android:title="Pomoc"
         app:showAsAction="always" />
     <item
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/home"
+        android:title="Pomoc"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/barcodeButton"
-        style="@style/SelectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/barcode"
@@ -20,7 +25,6 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/recognizerButton"
-        style="@style/SelectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/ocr"
@@ -28,7 +32,6 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/cartButton"
-        style="@style/SelectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/shopping_cart"
@@ -37,7 +40,6 @@
 
     <item
         android:id="@+id/cartDetailsButton"
-        style="@style/SelectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/kcal"

@@ -14,18 +14,22 @@ import java.util.*
 
 class QuestionsActivity : AppCompatActivity() {
 
+
+    //todo are all these questions really important for me?
+    //todo implemnet shared preferences
     private lateinit var binding: ActivityQuestionsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        this.supportActionBar?.hide()
         binding = ActivityQuestionsBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         binding.datePicker.setOnClickListener { view -> clickDatePicker(view) }
         binding.confirmButtonQuestions.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -47,33 +51,30 @@ class QuestionsActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.helpButton -> {
-                //val intent = Intent(this, MainActivity::class.java)
-                //startActivity(intent)
-                //finish()
-            }
-            R.id.cartButton -> {
-                val intent = Intent(this, CartActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            R.id.cartDetailsButton -> {
-                val intent = Intent(this, CartDetailsActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            else -> {
-
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
+    //override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    //    menuInflater.inflate(R.menu.menu,menu)
+    //    return super.onCreateOptionsMenu(menu)
+    //}
+    //override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    //    when(item.itemId) {
+    //        R.id.helpButton -> {
+    //            //val intent = Intent(this, MainActivity::class.java)
+    //            //startActivity(intent)
+    //            //finish()
+    //        }
+    //        R.id.cartButton -> {
+    //            val intent = Intent(this, CartActivity::class.java)
+    //            startActivity(intent)
+    //            finish()
+    //        }
+    //        R.id.cartDetailsButton -> {
+    //            val intent = Intent(this, CartDetailsActivity::class.java)
+    //            startActivity(intent)
+    //            finish()
+    //        }
+    //        else -> {
+    //        }
+    //    }
+    //    return super.onOptionsItemSelected(item)
+    //}
 }

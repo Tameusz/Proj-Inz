@@ -5,24 +5,41 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import com.example.proj_inz.databinding.ActivityTextRecognizerBinding
+import com.example.proj_inz.databinding.TextRecognizerBinding
+import com.example.proj_inz.databinding.TextRecognizerDetailsBinding
+import com.example.proj_inz.databinding.TextRecognizerErrorBinding
 
 class TextRecognizerActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTextRecognizerBinding
+    private lateinit var bindingRecognizer: TextRecognizerBinding
+    private lateinit var bindingRecognizerDetails: TextRecognizerDetailsBinding
+    private lateinit var bindingRecognizerError: TextRecognizerErrorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityTextRecognizerBinding.inflate(layoutInflater)
+        bindingRecognizer = TextRecognizerBinding.inflate(layoutInflater)
+        bindingRecognizerDetails = TextRecognizerDetailsBinding.inflate(layoutInflater)
+        bindingRecognizerError = TextRecognizerErrorBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
+        setContentView(bindingRecognizer.root)
 
-        binding.buttonRecognizerConfirm.setOnClickListener {
-            val intent = Intent(this, TextRecognizerDetailsActivity::class.java)
-            startActivity(intent)
+        bindingRecognizer.buttonRecognizerConfirm.setOnClickListener {
+            setContentView(bindingRecognizerDetails.root)
+        }
+        bindingRecognizerDetails.buttonRecognizerDetailsConfirm.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
             finish()
+        }
+        bindingRecognizerDetails.buttonRecognizerDetailsToRecognizer.setOnClickListener {
+            setContentView(bindingRecognizer.root)
+        }
+        bindingRecognizerError.errorBarcodeToBarcode.setOnClickListener {
+            startActivity(Intent(this, BarcodeReaderActivity::class.java))
+            finish()
+        }
+        bindingRecognizerError.errorBarcodeToRecognizer.setOnClickListener {
+            setContentView(bindingRecognizer.root)
         }
     }
 
@@ -34,23 +51,29 @@ class TextRecognizerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.helpButton -> {
-                //val intent = Intent(this, MainActivity::class.java)
-                //startActivity(intent)
-                //finish()
+                startActivity(Intent(this, HelpActivity::class.java))
+                finish()
             }
+            R.id.homeButton -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+            R.id.barcodeButton -> {
+                startActivity(Intent(this, BarcodeReaderActivity::class.java))
+                finish()
+            }
+            R.id.recognizerButton -> { }
             R.id.cartButton -> {
-                val intent = Intent(this, CartActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, CartActivity::class.java))
                 finish()
             }
             R.id.cartDetailsButton -> {
-                val intent = Intent(this, CartDetailsActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, CartActivity::class.java).apply {
+                    putExtra("MESSAGE","toCartDetails")
+                })
                 finish()
             }
-            else -> {
-
-            }
+            else -> { }
         }
 
         return super.onOptionsItemSelected(item)

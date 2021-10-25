@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".CartDetailsActivity"
+    tools:context=".CartActivity"
     android:background="@drawable/background_blue">
 
     <androidx.cardview.widget.CardView
@@ -57,6 +57,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -65,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
 
             <TextView
@@ -87,6 +88,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -95,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
 
             <TextView
@@ -117,6 +119,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -126,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
 
             <TextView
@@ -148,6 +151,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -157,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
 
             <TextView
@@ -179,6 +183,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -188,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -209,6 +214,7 @@
                     android:layout_weight="1"
                     android:max="10"
                     android:minHeight="50dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
@@ -218,8 +224,32 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="0/10"/>
+                    android:text="@string/temp_text_nuritional_values"/>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/cartDetailsToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Przejdź do koszyka"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/cartDetailsToBarcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Przejdź do czytnika kodów"
+                android:textStyle="bold"/>
+
+
+            <Button
+                android:id="@+id/cartDetailsToRecognizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Przejdź do rozpoznawania tekstu"
+                android:textStyle="bold"/>
+
         </LinearLayout>
         </ScrollView>
 

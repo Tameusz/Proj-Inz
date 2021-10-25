@@ -5,30 +5,48 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import com.example.proj_inz.databinding.ActivityCartBinding
+import com.example.proj_inz.databinding.CartBinding
+import com.example.proj_inz.databinding.CartDetailsBinding
 
 class CartActivity : AppCompatActivity() {
 
-    private lateinit var binding :ActivityCartBinding
+    private lateinit var bindingCart: CartBinding
+    private lateinit var bindingCartDetails: CartDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCartBinding.inflate(layoutInflater)
-
-        setContentView(binding.root)
-
-        binding.cartToBarcode.setOnClickListener {
-            val intent = Intent(this, BarcodeReaderActivity::class.java)
-            startActivity(intent)
-            finish()
+        bindingCart = CartBinding.inflate(layoutInflater)
+        bindingCartDetails = CartDetailsBinding.inflate(layoutInflater)
+        val extras = intent.extras
+        if(extras?.getString("MESSAGE").equals("toCartDetails")) {
+            setContentView(bindingCartDetails.root)
+        } else {
+            setContentView(bindingCart.root)
         }
 
-        binding.cartToRecognizer.setOnClickListener {
-            val intent = Intent(this, TextRecognizerActivity::class.java)
-            startActivity(intent)
+        bindingCart.cartToBarcode.setOnClickListener {
+            startActivity(Intent(this, BarcodeReaderActivity::class.java))
             finish()
+        }
+        bindingCart.cartToRecognizer.setOnClickListener {
+            startActivity(Intent(this, TextRecognizerActivity::class.java))
+            finish()
+        }
+        bindingCart.cartToCartDetails.setOnClickListener {
+            setContentView(bindingCartDetails.root)
+        }
+
+        bindingCartDetails.cartDetailsToBarcode.setOnClickListener {
+            startActivity(Intent(this, BarcodeReaderActivity::class.java))
+            finish()
+        }
+        bindingCartDetails.cartDetailsToRecognizer.setOnClickListener {
+            startActivity(Intent(this, TextRecognizerActivity::class.java))
+            finish()
+        }
+        bindingCartDetails.cartDetailsToCart.setOnClickListener {
+            setContentView(bindingCart.root)
         }
 
     }
@@ -41,23 +59,28 @@ class CartActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.helpButton -> {
-                //val intent = Intent(this, MainActivity::class.java)
-                //startActivity(intent)
-                //finish()
+                startActivity(Intent(this, HelpActivity::class.java))
+                finish()
+            }
+            R.id.homeButton -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+            R.id.barcodeButton -> {
+                startActivity(Intent(this, BarcodeReaderActivity::class.java))
+                finish()
+            }
+            R.id.recognizerButton -> {
+                startActivity(Intent(this, TextRecognizerActivity::class.java))
+                finish()
             }
             R.id.cartButton -> {
-                val intent = Intent(this, CartActivity::class.java)
-                startActivity(intent)
-                finish()
+                setContentView(bindingCart.root)
             }
             R.id.cartDetailsButton -> {
-                val intent = Intent(this, CartDetailsActivity::class.java)
-                startActivity(intent)
-                finish()
+                setContentView(bindingCartDetails.root)
             }
-            else -> {
-
-            }
+            else -> { }
         }
 
         return super.onOptionsItemSelected(item)

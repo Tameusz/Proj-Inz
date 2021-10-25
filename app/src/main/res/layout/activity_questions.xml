@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,21 +20,24 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Witaj w aplikacji"
-            android:textSize="45sp" />
+            android:textSize="45sp"
+            android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Odpowiedz na kilka pytań. Pomogą one w dalszym działaniu aplikacji"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Jaka jest twoja waga?"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -46,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Jaka jest twoja waga docelowa?"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -60,7 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Jaki jest twój wzros(cm)?"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -74,7 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Podaj datę swoich urodzin?"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/datePicker"
@@ -91,23 +98,28 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Podaj swoją płeć"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineAmbientShadowColor="@color/white">
 
             <RadioButton
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Kobieta"/>
+                android:text="Kobieta"
+                android:textColor="@color/white"/>
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Mężczyzna"/>
+                android:text="Mężczyzna"
+                android:textColor="@color/white"/>
 
         </RadioGroup>
 
@@ -116,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Zatwierdź"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 

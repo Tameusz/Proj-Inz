@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ProjInz" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_color_1</item>
+        <item name="colorPrimaryVariant">@color/blue_color_2</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,14 +13,4 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <!-- styles for ripple effect in image buttons-->
-    <style name="SelectableItemTheme">
-        <item name="colorControlHighlight">@color/ripple_color</item>
-    </style>
-
-    <style name="SelectableItemBackground">
-        <item name="android:theme">@style/SelectableItemTheme</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
 </resources>

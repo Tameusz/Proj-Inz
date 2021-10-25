@@ -5,33 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
-import com.example.proj_inz.databinding.*
+import com.example.proj_inz.databinding.HelpBinding
 
-class MainActivity : AppCompatActivity() {
+class HelpActivity : AppCompatActivity() {
 
-
-    private lateinit var bindingMain: ActivityMainBinding
+    private lateinit var bindingHelp: HelpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingMain = ActivityMainBinding.inflate(layoutInflater)
+        bindingHelp = HelpBinding.inflate(layoutInflater)
 
-        setContentView(bindingMain.root)
+        setContentView(bindingHelp.root)
 
-
-        bindingMain.buttonBarcodeReader.setOnClickListener {
-            startActivity(Intent(this, BarcodeReaderActivity::class.java))
+        bindingHelp.helpToMenu.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        bindingMain.buttonTextRecognizer.setOnClickListener {
-            startActivity(Intent(this, TextRecognizerActivity::class.java))
-            finish()
-        }
+
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
@@ -40,11 +32,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.helpButton -> {
-                startActivity(Intent(this, HelpActivity::class.java))
+            R.id.helpButton -> { }
+            R.id.homeButton -> {
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
-            R.id.homeButton -> { }
             R.id.barcodeButton -> {
                 startActivity(Intent(this, BarcodeReaderActivity::class.java))
                 finish()
