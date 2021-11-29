@@ -12,6 +12,10 @@ class CartActivity : AppCompatActivity() {
 
     private lateinit var bindingCart: CartBinding
     private lateinit var bindingCartDetails: CartDetailsBinding
+    private var standardWeight: Int = 130
+    private var standardHeight: Int = 170
+    private var standardAge: Int = 22
+    private var standardSex: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,8 @@ class CartActivity : AppCompatActivity() {
             setContentView(bindingCart.root)
         }
 
+        progressBarAdjustment(calculateCalories(standardWeight,standardHeight,standardAge,standardSex))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,19 +66,15 @@ class CartActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.helpButton -> {
                 startActivity(Intent(this, HelpActivity::class.java))
-                finish()
             }
             R.id.homeButton -> {
                 startActivity(Intent(this, MainActivity::class.java))
-                finish()
             }
             R.id.barcodeButton -> {
                 startActivity(Intent(this, BarcodeReaderActivity::class.java))
-                finish()
             }
             R.id.recognizerButton -> {
                 startActivity(Intent(this, TextRecognizerActivity::class.java))
-                finish()
             }
             R.id.cartButton -> {
                 setContentView(bindingCart.root)
@@ -84,5 +86,35 @@ class CartActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun progressBarAdjustment(calories: Int) {
+        //calories
+        bindingCartDetails.progressBarKCAL.max = calories
+        bindingCartDetails.textViewKCAL.text = calories.toString()
+        //protein
+        bindingCartDetails.progressBarProtein.max = ((0.15*calories)/4).toInt()
+        bindingCartDetails.textViewProtein.text = ((0.15*calories)/4).toInt().toString()
+        //fat
+        bindingCartDetails.progressBarFat.max = ((0.30*calories)/9).toInt()
+        bindingCartDetails.textViewFat.text = ((0.30*calories)/9).toInt().toString()
+        //carbohydrates
+        bindingCartDetails.progressBarCarbohydrates.max = ((0.55*calories)/4).toInt()
+        bindingCartDetails.textViewCarbohydrates.text = ((0.55*calories)/4).toInt().toString()
+        //fiber
+        bindingCartDetails.progressBarFiber.max = 40
+        bindingCartDetails.textViewFiber.text = "40"
+        //salt
+        bindingCartDetails.progressBarSalt.max = 5
+        bindingCartDetails.textViewSalt.text = "5"
+    }
+
+    private fun calculateCalories(weight:Int,  height:Int, age:Int, sex:Int) :Int {
+        //for now 1 - male ,2 - female
+        return if(sex == 1) {
+            ((9.99*weight) + (6.25*height) - (4.92*age) + 5).toInt()
+        } else {
+            ((9.99*weight) + (6.25*height) - (4.92*age) - 161).toInt()
+        }
     }
 }

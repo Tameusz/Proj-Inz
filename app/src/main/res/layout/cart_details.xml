@@ -52,17 +52,19 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarKCAL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:max="10"
+                    android:max="2000"
                     android:minHeight="50dp"
                     android:progressDrawable="@drawable/custom_progress_bar"
-                    android:progress="0"
+                    android:progress="500"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewKCAL"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -74,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="Białko"
+                android:text="Białko(g)"
                 android:textStyle="bold"
                 android:background="@drawable/border_text_view"/>
             <LinearLayout
@@ -83,17 +85,19 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarProtein"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:max="10"
+                    android:max="2000"
                     android:minHeight="50dp"
                     android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewProtein"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -105,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="Tłuszcze"
+                android:text="Tłuszcze(g)"
                 android:textStyle="bold"
                 android:background="@drawable/border_text_view"/>
             <LinearLayout
@@ -114,6 +118,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarFat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -123,9 +128,9 @@
                     android:progress="0"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewFat"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -137,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="Węglowodany"
+                android:text="Węglowodany(g)"
                 android:textStyle="bold"
                 android:background="@drawable/border_text_view"/>
             <LinearLayout
@@ -146,6 +151,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarCarbohydrates"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -157,7 +163,8 @@
                     style="?android:attr/progressBarStyleHorizontal"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewCarbohydrates"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -169,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="Błonnik"
+                android:text="Błonnik(g)"
                 android:textStyle="bold"
                 android:background="@drawable/border_text_view"/>
             <LinearLayout
@@ -178,6 +185,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarFiber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -189,7 +197,8 @@
                     style="?android:attr/progressBarStyleHorizontal"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewFiber"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -200,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="Sól"
+                android:text="Sól(g)"
                 android:textStyle="bold"
                 android:background="@drawable/border_text_view"/>
             <LinearLayout
@@ -209,10 +218,11 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ProgressBar
+                    android:id="@+id/progressBarSalt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:max="10"
+                    android:max="5"
                     android:minHeight="50dp"
                     android:progressDrawable="@drawable/custom_progress_bar"
                     android:progress="0"
@@ -220,11 +230,12 @@
                     style="?android:attr/progressBarStyleHorizontal"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewSalt"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="@string/temp_text_nuritional_values"/>
+                    android:text="5"/>
             </LinearLayout>
 
             <Button

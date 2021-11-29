@@ -23,11 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         bindingMain.buttonBarcodeReader.setOnClickListener {
             startActivity(Intent(this, BarcodeReaderActivity::class.java))
-            finish()
         }
         bindingMain.buttonTextRecognizer.setOnClickListener {
             startActivity(Intent(this, TextRecognizerActivity::class.java))
-            finish()
         }
     }
 

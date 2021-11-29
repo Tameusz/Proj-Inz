@@ -29,12 +29,30 @@
                 android:text="Zrób zdjęcie tabeli wartości odżywczych"
                 android:gravity="center"/>
 
+            <ImageView
+                android:id="@+id/ivPhotoToRecognize"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+            <TextView
+                android:id="@+id/tvRecognizedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
             <Button
                 android:id="@+id/buttonRecognizerConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Zatwierdź"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/buttonRecognizerToCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Przejdź do aparatu"
                 android:textStyle="bold"/>
 
         </LinearLayout>

@@ -25,17 +25,32 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Zrób zdjęcie kodu kreskowemu"
+                android:text="Najedź na kod kreskowy"
                 android:gravity="center"/>
-
-            <Button
+            <com.budiyev.android.codescanner.CodeScannerView
+                android:id="@+id/scanner_view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:autoFocusButtonColor="@android:color/white"
+                app:autoFocusButtonVisible="false"
+                app:flashButtonColor="@android:color/white"
+                app:flashButtonVisible="false"
+                app:frameColor="@android:color/white"
+                app:frameCornersSize="50dp"
+                app:frameCornersRadius="0dp"
+                app:frameAspectRatioWidth="1"
+                app:frameAspectRatioHeight="1"
+                app:frameSize="0.75"
+                app:frameThickness="2dp"
+                app:maskColor="#77000000"/>
+            <!--<Button
                 android:id="@+id/buttonBarcodeConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Zatwierdź"
                 android:textStyle="bold"/>
-
+            -->
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -20,7 +20,6 @@ class HelpActivity : AppCompatActivity() {
 
         bindingHelp.helpToMenu.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
 
     }
