@@ -1,6 +1,8 @@
 package com.example.proj_inz
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,14 +16,25 @@ class HelpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingHelp = HelpBinding.inflate(layoutInflater)
+        this.supportActionBar?.hide()
 
+        bindingHelp = HelpBinding.inflate(layoutInflater)
         setContentView(bindingHelp.root)
+
+        val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
 
         bindingHelp.helpToMenu.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            val ed: SharedPreferences.Editor = pref.edit()
+            ed.putBoolean("help_activity_executed", true)
+            ed.apply()
         }
 
+        if (pref.getBoolean("help_activity_executed", false)) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -32,28 +45,11 @@ class HelpActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.helpButton -> { }
-            R.id.homeButton -> {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-            R.id.barcodeButton -> {
-                startActivity(Intent(this, BarcodeReaderActivity::class.java))
-                finish()
-            }
-            R.id.recognizerButton -> {
-                startActivity(Intent(this, TextRecognizerActivity::class.java))
-                finish()
-            }
-            R.id.cartButton -> {
-                startActivity(Intent(this, CartActivity::class.java))
-                finish()
-            }
-            R.id.cartDetailsButton -> {
-                startActivity(Intent(this, CartActivity::class.java).apply {
-                    putExtra("MESSAGE","toCartDetails")
-                })
-                finish()
-            }
+            R.id.homeButton -> { startActivity(Intent(this, MainActivity::class.java)) }
+            R.id.barcodeButton -> { startActivity(Intent(this, BarcodeReaderActivity::class.java)) }
+            R.id.recognizerButton -> { startActivity(Intent(this, TextRecognizerActivity::class.java)) }
+            R.id.cartButton -> { startActivity(Intent(this, CartActivity::class.java)) }
+            R.id.cartDetailsButton -> { startActivity(Intent(this, CartActivity::class.java).apply { putExtra("MESSAGE","toCartDetails") }) }
             else -> { }
         }
 

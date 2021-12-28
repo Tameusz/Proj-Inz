@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Witaj w aplikacji 'nazwa'. Jej celem jest zbieranie informacji na temat wartości odzywczych twoich zakupów. \nDaj sobie pomóc! "/>
+                    android:text="Witaj w aplikacji 'nazwa'. Jej celem jest zbieranie informacji na temat wartości odzywczych twoich zakupów."/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Właśnie się tu znajdujesz! Ten przycisk prowadzi cie do okienka pomocy" />
+                    android:text="Ten przycisk prowadzi cie do okienka pomocy" />
 
                 <ImageView
                     android:layout_width="100dp"
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Przyciśnięcie czytnika kodów kreskowych przeniesie cię do okna zajmującego się tą czynnością(how cleaver). Pamiętaj by kod kreskowy skanować w odpowiedni sposób - liczby powinny być na samym dole" />
+                    android:text="Przyciśnięcie czytnika kodów kreskowych przeniesie cię do okna zajmującego się tą czynnością. Pamiętaj by kod kreskowy skanować w odpowiedni sposób - liczby powinny być na samym dole" />
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -94,11 +94,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="To okno jest bardzo ważne. W nim bowiem znajdziesz wartości odżywcze produktów które zamierzasz kupić./n Na bieżąco kontroluj stan sowich zakupów, po to chyba pobrałeś tą aplikację prawda?" />
+                    android:text="Tutaj znajdziesz wartości odżywcze produktów które zamierzasz kupić./n Na bieżąco kontroluj stan swoich zakupów." />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Jeszcze jedno! Pamiętaj by pozwolić aplikacji na dostęp do aparatu - jest to najważniejsze do poprawnego działąnia aplikacji!"
+                    android:text="Pamiętaj by pozwolić aplikacji na dostęp do aparatu - jest to potrzebne do poprawnego działania aplikacji!"
                     android:layout_marginTop="20dp"/>
                 <Button
                     android:id="@+id/helpToMenu"

@@ -59,12 +59,11 @@
                     android:max="2000"
                     android:minHeight="50dp"
                     android:progressDrawable="@drawable/custom_progress_bar"
-                    android:progress="500"
                     android:indeterminate="false"
                     style="?android:attr/progressBarStyleHorizontal"/>
                 <TextView
                     android:id="@+id/textViewKCAL"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -97,7 +96,7 @@
                     style="?android:attr/progressBarStyleHorizontal"/>
                 <TextView
                     android:id="@+id/textViewProtein"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -130,7 +129,7 @@
                     style="?android:attr/progressBarStyleHorizontal"/>
                 <TextView
                     android:id="@+id/textViewFat"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -164,7 +163,7 @@
 
                 <TextView
                     android:id="@+id/textViewCarbohydrates"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -198,7 +197,7 @@
 
                 <TextView
                     android:id="@+id/textViewFiber"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
@@ -231,7 +230,7 @@
 
                 <TextView
                     android:id="@+id/textViewSalt"
-                    android:layout_width="65dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"

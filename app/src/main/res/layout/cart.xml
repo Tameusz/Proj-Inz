@@ -32,33 +32,34 @@
                     android:gravity="center"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/shopItemList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Produkty w wózku"/>
-
-
                 <Button
                     android:id="@+id/cartToCartDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Przejdź wartości odżywczych"
                     android:textStyle="bold"/>
-
                 <Button
                     android:id="@+id/cartToBarcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Przejdź do czytnika kodów"
                     android:textStyle="bold"/>
-
-
                 <Button
                     android:id="@+id/cartToRecognizer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Przejdź do rozpoznawania tekstu"
                     android:textStyle="bold"/>
-
+                <Button
+                    android:id="@+id/cartClearButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wyczyść listę"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>

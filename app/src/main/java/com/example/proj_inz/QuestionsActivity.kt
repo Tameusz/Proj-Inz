@@ -1,22 +1,18 @@
 package com.example.proj_inz
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proj_inz.databinding.ActivityQuestionsBinding
-import java.text.SimpleDateFormat
-import java.util.*
+
+import android.content.SharedPreferences
+import android.widget.Toast
+import androidx.core.view.get
 
 
 class QuestionsActivity : AppCompatActivity() {
 
-
-    //todo are all these questions really important for me?
-    //todo implemnet shared preferences
     private lateinit var binding: ActivityQuestionsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,69 +20,42 @@ class QuestionsActivity : AppCompatActivity() {
 
         this.supportActionBar?.hide()
         binding = ActivityQuestionsBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+        val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
 
-        //binding.datePicker.setOnClickListener { view -> clickDatePicker(view) }
         binding.confirmButtonQuestions.setOnClickListener {
-            val intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent)
+            if(binding.qWeight.text.toString() == ""
+                && binding.qHeight.text.toString() == ""
+                && binding.qAge.text.toString() == ""
+                && binding.radioGroup.checkedRadioButtonId == -1) {
+                Toast.makeText(this, "Uzupełnij dane!!!", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, HelpActivity::class.java))
+                addSharedPreferences(editor)
+                val ed: SharedPreferences.Editor = pref.edit()
+                ed.putBoolean("questions_activity_executed", true)
+                ed.apply()
+            }
         }
 
-        //todo analyze this code
-        //val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
-        //if (pref.getBoolean("activity_executed", false)) {
-        //    val intent = Intent(this, HelpActivity::class.java)
-        //    startActivity(intent)
-        //    finish()
-        //} else {
-        //    val ed: SharedPreferences.Editor = pref.edit()
-        //    ed.putBoolean("activity_executed", true)
-        //    ed.commit()
-        //}
-
+        if (pref.getBoolean("questions_activity_executed", false)) {
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
-    //fun clickDatePicker(view: View) {
-    //    val myCalendar = Calendar.getInstance()
-    //    val year = myCalendar.get(Calendar.YEAR)
-    //    val month = myCalendar.get(Calendar.MONTH)
-    //    val dayOfMonth = myCalendar.get(Calendar.DAY_OF_MONTH)
-    //    val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-    //        val selectedDate = "$dayOfMonth/${month+1}/$year"
-    //        binding.datePicker.setText(selectedDate)
-    //        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-    //        val chosenDateSimplified = simpleDateFormat.parse(selectedDate)!!.time / 60000
-    //        val curerntDate = simpleDateFormat.parse(simpleDateFormat.format(System.currentTimeMillis()))!!.time / 60000
-    //    }, year, month, dayOfMonth)
-    //    datePickerDialog.datePicker.setMaxDate(Date().time - 86400000)
-    //    datePickerDialog.show()
-    //}
-
-    //override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    //    menuInflater.inflate(R.menu.menu,menu)
-    //    return super.onCreateOptionsMenu(menu)
-    //}
-    //override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    //    when(item.itemId) {
-    //        R.id.helpButton -> {
-    //            //val intent = Intent(this, MainActivity::class.java)
-    //            //startActivity(intent)
-    //            //finish()
-    //        }
-    //        R.id.cartButton -> {
-    //            val intent = Intent(this, CartActivity::class.java)
-    //            startActivity(intent)
-    //            finish()
-    //        }
-    //        R.id.cartDetailsButton -> {
-    //            val intent = Intent(this, CartDetailsActivity::class.java)
-    //            startActivity(intent)
-    //            finish()
-    //        }
-    //        else -> {
-    //        }
-    //    }
-    //    return super.onOptionsItemSelected(item)
-    //}
+    private fun addSharedPreferences(ed: SharedPreferences.Editor) {
+        ed.putInt("user_weight", binding.qWeight.text.toString().toInt())
+        ed.putInt("user_height", binding.qHeight.text.toString().toInt())
+        ed.putInt("user_age", binding.qAge.text.toString().toInt())
+        //female-2131231106, male-2131231107
+        if(binding.radioGroup.checkedRadioButtonId == 2131231106) {
+            ed.putInt("user_gender", 2)
+        } else if(binding.radioGroup.checkedRadioButtonId == 2131231107) {
+            ed.putInt("user_gender", 1)
+        }
+        ed.apply()
+    }
 }

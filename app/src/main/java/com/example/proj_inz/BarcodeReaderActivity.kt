@@ -1,7 +1,9 @@
 package com.example.proj_inz
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +25,12 @@ import com.android.volley.toolbox.StringRequest
 import org.json.JSONObject
 import com.android.volley.Request
 import com.android.volley.toolbox.Volley
+import com.example.proj_inz.databinding.CartBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.Exception
+import java.util.HashSet
+import kotlin.reflect.KClass
 
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -31,13 +39,17 @@ class BarcodeReaderActivity : AppCompatActivity() {
 
     private lateinit var codeScanner: CodeScanner
 
-    //todo implement barcode reader
-    //todo implement possible scenarios for barcode (product found or error)
-    //todo implement putextras for cart
     private lateinit var bindingBarcode: BarcodeReaderBinding
     private lateinit var bindingBarcodeDetails: BarcodeReaderDetailsBinding
     private lateinit var bindingBarcodeError: BarcodeReaderErrorBinding
     private lateinit var scannedCode: String
+    var energy100g: Float = 0.0f
+    var proteins100g: Float = 0.0f
+    var fat100g: Float = 0.0f
+    var carbohydrates100g: Float = 0.0f
+    var fiber100g: Float = 0.0f
+    var salt100g: Float = 0.0f
+    var productName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,61 +59,31 @@ class BarcodeReaderActivity : AppCompatActivity() {
         bindingBarcodeError = BarcodeReaderErrorBinding.inflate(layoutInflater)
 
         setContentView(bindingBarcode.root)
-
-        //bindingBarcode.buttonBarcodeConfirm.setOnClickListener {
-        //    setContentView(bindingBarcodeDetails.root)
-        //}
-        bindingBarcodeDetails.buttonBarcodeDetailsConfirm.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
-            finish()
-        }
-        bindingBarcodeDetails.buttonBarcodeDetailsToBarcode.setOnClickListener {
-            setContentView(bindingBarcode.root)
-        }
-        bindingBarcodeError.errorBarcodeToBarcode.setOnClickListener {
-            setContentView(bindingBarcode.root)
-        }
-        bindingBarcodeError.errorBarcodeToRecognizer.setOnClickListener {
-            startActivity(Intent(this, TextRecognizerActivity::class.java))
-            finish()
-        }
-
+        buttonsFunctionality()
         setupPermissions()
         codeScanner()
-
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.helpButton -> {
-                startActivity(Intent(this, HelpActivity::class.java))
-            }
-            R.id.homeButton -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
+                val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
+                val ed: SharedPreferences.Editor = pref.edit()
+                ed.putBoolean("help_activity_executed", false)
+                ed.apply()
+                startActivity(Intent(this, HelpActivity::class.java)) }
+            R.id.homeButton -> { startActivity(Intent(this, MainActivity::class.java)) }
             R.id.barcodeButton -> { }
-            R.id.recognizerButton -> {
-                startActivity(Intent(this, TextRecognizerActivity::class.java))
-            }
-            R.id.cartButton -> {
-                startActivity(Intent(this, CartActivity::class.java))
-            }
-            R.id.cartDetailsButton -> {
-                startActivity(Intent(this, CartActivity::class.java).apply {
-                    putExtra("MESSAGE","toCartDetails")
-                })
-            }
+            R.id.recognizerButton -> { startActivity(Intent(this, TextRecognizerActivity::class.java)) }
+            R.id.cartButton -> { startActivity(Intent(this, CartActivity::class.java)) }
+            R.id.cartDetailsButton -> { startActivity(Intent(this, CartActivity::class.java).apply { putExtra("MESSAGE","toCartDetails") }) }
             else -> { }
         }
-
         return super.onOptionsItemSelected(item)
     }
-
     @SuppressLint("SetTextI18n")
     private fun codeScanner() {
         codeScanner = CodeScanner(this, bindingBarcode.scannerView)
@@ -115,32 +97,14 @@ class BarcodeReaderActivity : AppCompatActivity() {
             isFlashEnabled = false
             decodeCallback = DecodeCallback {
                 runOnUiThread{
-                    //Toast.makeText(this@BarcodeReaderActivity, "${it.text}", Toast.LENGTH_SHORT).show()
-                    //code that is scanned by scanner
                     scannedCode = it.text
 
                     val apiResponse = "https://openfoodfacts.org/api/v0/product/$scannedCode.json"
                     val request = StringRequest(Request.Method.GET, apiResponse, { s ->
-                        if(JSONObject(s).get("status").toString().toInt()==0)
-                        {
-                            setContentView(bindingBarcodeError.root)
-                        }
-                        else
-                        {
-                            //todo fix fiber issues (maybe own database or change api to fatsecret or just change it to sugar)
+                        if(JSONObject(s).get("status").toString().toInt()==0) { setContentView(bindingBarcodeError.root) }
+                        else {
                             setContentView(bindingBarcodeDetails.root)
-                            val energy100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("energy-kcal_100g").toString().toDouble()
-                            val proteins100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("proteins_100g").toString().toDouble()
-                            val fat100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("fat_100g").toString().toDouble()
-                            val carbohydrates100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("carbohydrates_100g").toString().toDouble()
-                            //val fiber100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("fiber_100g").toString().toDouble()
-                            val salt100g = JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get("salt_100g").toString().toDouble()
-                            val productName = JSONObject(JSONObject(s).get("product").toString()).get("product_name").toString()
-                            bindingBarcodeDetails.productDetailsBarcodeReader.text = "Wybrałeś $productName \nTo są dawki makroskładników na 100 gram:\nEnergia: $energy100g\nBiałko: $proteins100g\nTłuszcze: $fat100g\n" +
-                                    "Weglowodany: $carbohydrates100g\n" +
-                                    //"Błonnik: $fiber100g" +
-                                    "\nSól: $salt100g\n\n\nIle zamierzasz spożyć produktu w określonym czasie"
-
+                            response(s)
                         }
                          }
                     ) { bindingBarcodeDetails.productDetailsBarcodeReader.text = "Some error occurred!!" }
@@ -148,50 +112,87 @@ class BarcodeReaderActivity : AppCompatActivity() {
                     rQueue.add(request)
                 }
             }
-
-            errorCallback = ErrorCallback {
-                runOnUiThread {
-                    Log.e("Main", "Camera initialization error: ${it.message}")
-                }
-            }
+            errorCallback = ErrorCallback { runOnUiThread { Log.e("Main", "Camera initialization error: ${it.message}") } }
         }
-
-        bindingBarcode.scannerView.setOnClickListener {
-            codeScanner.startPreview()
-        }
-
+        bindingBarcode.scannerView.setOnClickListener { codeScanner.startPreview() }
     }
-
     override fun onResume() {
         super.onResume()
         codeScanner.startPreview()
     }
-
     override fun onPause() {
         codeScanner.releaseResources()
         super.onPause()
     }
-
-    private fun setupPermissions() {
-        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-
-        if(permission != PackageManager.PERMISSION_GRANTED) {
-            makeRequest()
-        }
-    }
-
-    private fun makeRequest() {
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
-    }
-
+    private fun setupPermissions() { if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { makeRequest() } }
+    private fun makeRequest() { ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE) }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Daj dostęp by korzystać", Toast.LENGTH_SHORT).show()
-                }
-            }
+        when (requestCode) {CAMERA_REQUEST_CODE -> { if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) { Toast.makeText(this, "Daj dostęp by korzystać", Toast.LENGTH_SHORT).show() } } }
+    }
+    @SuppressLint("SetTextI18n")
+    private fun response(stringJson: String) {
+        try {
+            if(isThereNutrimentsData(stringJson,"energy-kcal_100g")) { energy100g = fetchNutrimentsData(stringJson, "energy-kcal_100g") } else { energy100g = 0f }
+            if(isThereNutrimentsData(stringJson, "proteins_100g")) { proteins100g = fetchNutrimentsData(stringJson, "proteins_100g") } else { proteins100g = 0f }
+            if(isThereNutrimentsData(stringJson, "fat_100g")) { fat100g = fetchNutrimentsData(stringJson, "fat_100g") } else { fat100g = 0f }
+            if(isThereNutrimentsData(stringJson,"carbohydrates_100g")) { carbohydrates100g = fetchNutrimentsData(stringJson, "carbohydrates_100g") } else { carbohydrates100g = 0f }
+            if(isThereNutrimentsData(stringJson, "fiber_100g")) { fiber100g = fetchNutrimentsData(stringJson, "fiber_100g") } else { fiber100g = 0f }
+            if(isThereNutrimentsData(stringJson, "salt_100g")) { salt100g = fetchNutrimentsData(stringJson, "salt_100g") } else { salt100g = 0f }
+            if(isThereValidProductName(stringJson, "product_name")) { productName = fetchProductName(stringJson,"product_name") } else { productName = "product" }
+            bindingBarcodeDetails.productDetailsBarcodeReader.text = updateTextView(energy100g, proteins100g, fat100g, carbohydrates100g, fiber100g, salt100g, productName)
+        } catch (e: Exception) {
+            println(e.printStackTrace())
         }
     }
+    private fun buttonsFunctionality() {
+        bindingBarcodeDetails.buttonBarcodeDetailsConfirm.setOnClickListener {
+            if(bindingBarcodeDetails.editTextBarcodeDetails.text.toString() == "") {
+                Toast.makeText(this, "Podaj liczbę gramów", Toast.LENGTH_SHORT).show()
+            }
+            startActivity(Intent(this, CartActivity::class.java))
+            updateSharedPreferences()
+        }
+        bindingBarcodeDetails.buttonBarcodeDetailsToBarcode.setOnClickListener { setContentView(bindingBarcode.root) }
+        bindingBarcodeError.errorBarcodeToBarcode.setOnClickListener { setContentView(bindingBarcode.root) }
+        bindingBarcodeError.errorBarcodeToRecognizer.setOnClickListener { startActivity(Intent(this, TextRecognizerActivity::class.java)) }
+    }
+    private fun isThereNutrimentsData(s: String, checkedNutriment: String): Boolean { return JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).has(checkedNutriment) }
+    private fun fetchNutrimentsData(s: String, nutrimentPer100g: String): Float { return JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get(nutrimentPer100g).toString().toFloat() }
+    private fun isThereValidProductName(s: String, productName: String): Boolean { return JSONObject(JSONObject(s).get("product").toString()).has(productName) }
+    private fun fetchProductName(s: String, productName: String): String { return JSONObject(JSONObject(s).get("product").toString()).get(productName).toString() }
+    private fun updateTextView(energy: Float, proteins:Float, fat: Float, carbohydrates: Float, fiber: Float, salt: Float, name: String): String {
+        return "Wybrałeś $name\n" +
+                "To są dawki makroskładników na 100 gram:\n" +
+                "Energia: $energy\n" +
+                "Białko: $proteins\n" +
+                "Tłuszcze: $fat\n" +
+                "Weglowodany: $carbohydrates\n" +
+                "Błonnik: $fiber\n" +
+                "Sól: $salt\n\n\n" +
+                "Ile zamierzasz spożyć produktu w określonym czasie"
+    }
+    private fun updateSharedPreferences() {
+        val gson = Gson()
+        val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
+        var listOfProductsPREF = pref.getString("listOfProductsPREF", "")
+        val itemType = object : TypeToken<List<Product>>() {}.type
+        val newProduct = Product(productName,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*energy100g)/100,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*proteins100g)/100,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fat100g)/100,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*carbohydrates100g)/100,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fiber100g/100),
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*salt100g)/100)
+        var listOfProducts = mutableListOf<Product>()
+        if(gson.fromJson<List<Product>>(listOfProductsPREF, itemType) != null) {
+            listOfProducts = gson.fromJson<List<Product>>(listOfProductsPREF, itemType).toMutableList()
+        }
+        listOfProducts += newProduct
+        val editor: SharedPreferences.Editor = pref.edit()
+        listOfProductsPREF = gson.toJson(listOfProducts)
+        editor.putString("listOfProductsPREF", listOfProductsPREF)
+        editor.apply()
+    }
+
 }

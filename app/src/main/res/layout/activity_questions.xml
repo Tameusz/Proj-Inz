@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,6 +39,8 @@
             android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/qWeight"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Waga kg"
@@ -57,6 +58,8 @@
             android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/qHeight"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wzrost cm"
@@ -72,6 +75,8 @@
             android:textColor="@color/white"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/qAge"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wiek"
@@ -85,20 +90,21 @@
             android:textSize="20sp"
             android:textColor="@color/white"/>
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:outlineSpotShadowColor="@color/white"
             android:outlineAmbientShadowColor="@color/white">
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/radioButtonFemale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Kobieta"
                 android:textColor="@color/white"/>
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonMale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
