@@ -25,12 +25,9 @@ import com.android.volley.toolbox.StringRequest
 import org.json.JSONObject
 import com.android.volley.Request
 import com.android.volley.toolbox.Volley
-import com.example.proj_inz.databinding.CartBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.Exception
-import java.util.HashSet
-import kotlin.reflect.KClass
 
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -182,8 +179,9 @@ class BarcodeReaderActivity : AppCompatActivity() {
             (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*proteins100g)/100,
             (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fat100g)/100,
             (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*carbohydrates100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fiber100g/100),
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*salt100g)/100)
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fiber100g)/100,
+            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*salt100g)/100,
+            bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat())
         var listOfProducts = mutableListOf<Product>()
         if(gson.fromJson<List<Product>>(listOfProductsPREF, itemType) != null) {
             listOfProducts = gson.fromJson<List<Product>>(listOfProductsPREF, itemType).toMutableList()

@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ProgressBar
+import android.widget.Toast
 import com.example.proj_inz.databinding.CartBinding
 import com.example.proj_inz.databinding.CartDetailsBinding
 import com.google.gson.Gson
@@ -32,19 +34,27 @@ class CartActivity : AppCompatActivity() {
         }
         //shared preferences
         val sharedPreferences = getSharedPreferences("ApplicationPREF", MODE_PRIVATE)
-        val userCalories = calculateCalories(sharedPreferences.getInt("user_weight",0), sharedPreferences.getInt("user_height",0), sharedPreferences.getInt("user_age",0), sharedPreferences.getInt("user_gender",1)
+        val userCalories = calculateCalories(
+            sharedPreferences.getInt("user_weight",0),
+            sharedPreferences.getInt("user_height",0),
+            sharedPreferences.getInt("user_age",0),
+            sharedPreferences.getInt("user_gender",1)
         )
         val forHowManyDays = sharedPreferences.getFloat("shopping_for",1f)
         progressBarFirstAdjustment(userCalories, forHowManyDays)
         buttonsFunctionality(sharedPreferences.edit(), userCalories, forHowManyDays)
         adjustProductList()
+        notifyAboutMax(bindingCartDetails.progressBarKCAL,"dostarczanych kalorii")
+        notifyAboutMax(bindingCartDetails.progressBarProtein,"dostarczanego białka")
+        notifyAboutMax(bindingCartDetails.progressBarFat,"dostarczanych tłuszczy")
+        notifyAboutMax(bindingCartDetails.progressBarCarbohydrates,"dostarczanych weglowodanów")
+        notifyAboutMax(bindingCartDetails.progressBarFiber,"dostarczanego błonnika")
+        notifyAboutMax(bindingCartDetails.progressBarSalt,"dostarczanej soli")
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.helpButton -> {
@@ -64,12 +74,10 @@ class CartActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
     private fun progressBarFirstAdjustment(calories: Int, forHowManyDays: Float) {
         progressMax(calories,forHowManyDays)
         progressTextAdjust("0/${(forHowManyDays*calories)}", "0/${(forHowManyDays*((0.15*calories)/4)).toInt()}", "0/${(forHowManyDays*((0.30*calories)/9)).toInt()}", "0/${(forHowManyDays*((0.55*calories)/4)).toInt()}", "0/${(forHowManyDays*40)}", "0/${(forHowManyDays*5)}")
     }
-
     private fun calculateCalories(weight:Int,  height:Int, age:Int, sex:Int) :Int {
         //for now 1 - male ,2 - female
         return if(sex == 1) {
@@ -78,7 +86,6 @@ class CartActivity : AppCompatActivity() {
             ((9.99*weight) + (6.25*height) - (4.92*age) - 161).toInt()
         }
     }
-
     @SuppressLint("SetTextI18n")
     private fun buttonsFunctionality(editor: SharedPreferences.Editor, calories: Int, forHowManyDays: Float) {
         bindingCart.cartToBarcode.setOnClickListener { startActivity(Intent(this, BarcodeReaderActivity::class.java)) }
@@ -95,7 +102,6 @@ class CartActivity : AppCompatActivity() {
             progressTextAdjust("0/${(forHowManyDays*calories)}", "0/${(forHowManyDays*((0.15*calories)/4)).toInt()}", "0/${(forHowManyDays*((0.30*calories)/9)).toInt()}", "0/${(forHowManyDays*((0.55*calories)/4)).toInt()}", "0/${(forHowManyDays*40)}", "0/${(forHowManyDays*5)}")
         }
     }
-
     @SuppressLint("SetTextI18n")
     private fun adjustProductList() {
         progressAdjust(0,0,0,0,0,0)
@@ -107,7 +113,7 @@ class CartActivity : AppCompatActivity() {
 
         if(gson.fromJson<ArrayList<Product>>(listPREF, itemType) != null) {
             for(listElement in list) {
-                bindingCart.shopItemList.text = "${bindingCart.shopItemList.text} \n${listElement.productName}"
+                bindingCart.shopItemList.text = "${bindingCart.shopItemList.text} \n${listElement.productName} ${listElement.productAmount}g"
                 progressAdjust(bindingCartDetails.progressBarKCAL.progress + listElement.energy100g.toInt(), bindingCartDetails.progressBarProtein.progress + listElement.proteins100g.toInt(), bindingCartDetails.progressBarFat.progress + listElement.fat100g.toInt(), bindingCartDetails.progressBarCarbohydrates.progress + listElement.carbohydrates100g.toInt(), bindingCartDetails.progressBarFiber.progress + listElement.fiber100g.toInt(), bindingCartDetails.progressBarSalt.progress + listElement.salt100g.toInt())
             }
             progressTextAdjust("${bindingCartDetails.progressBarKCAL.progress}/${bindingCartDetails.progressBarKCAL.max}", "${bindingCartDetails.progressBarProtein.progress}/${bindingCartDetails.progressBarProtein.max}", "${bindingCartDetails.progressBarFat.progress}/${bindingCartDetails.progressBarFat.max}", "${bindingCartDetails.progressBarCarbohydrates.progress}/${bindingCartDetails.progressBarCarbohydrates.max}", "${bindingCartDetails.progressBarFiber.progress}/${bindingCartDetails.progressBarFiber.max}", "${bindingCartDetails.progressBarSalt.progress}/${bindingCartDetails.progressBarSalt.max}")
@@ -137,5 +143,9 @@ class CartActivity : AppCompatActivity() {
         bindingCartDetails.progressBarFiber.max = (forHowManyDays*40).toInt()
         bindingCartDetails.progressBarSalt.max = (forHowManyDays*5).toInt()
     }
-
+    private fun notifyAboutMax(progressBar: ProgressBar, text: String) {
+        if(progressBar.max == progressBar.progress) {
+            Toast.makeText(this, "Osiągąłeś limit $text", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

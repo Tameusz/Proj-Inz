@@ -6,4 +6,5 @@ data class Product(var productName: String,
                    var fat100g: Float,
                    var carbohydrates100g: Float,
                    var fiber100g: Float,
-                   var salt100g: Float)
+                   var salt100g: Float,
+                   var productAmount: Float)

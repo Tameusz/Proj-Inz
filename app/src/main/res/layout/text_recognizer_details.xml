@@ -35,7 +35,8 @@
                     android:id="@+id/tvProductDetailsTextRecognizer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dane o produkcie"/>
+                    android:text="Dane o produkcie"
+                    android:inputType="textAutoCorrect|textMultiLine"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -46,7 +47,8 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/eText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
                 <Button
                     android:id="@+id/buttonRecognizerDetailsConfirm"

@@ -86,7 +86,7 @@ class TextRecognizerActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun textRecognizer(image: InputImage) {
         bindingRecognizerDetails.tvProductDetailsTextRecognizer.text = "Dane o produkcie\n"
-        val recognizer = TextRecognition.getClient(TextRecognizerOptions.Builder().build())
+        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         val result = recognizer.process(image)
             .addOnSuccessListener { visionText ->
                 val blocks: List<Text.TextBlock> = visionText.textBlocks
@@ -95,8 +95,8 @@ class TextRecognizerActivity : AppCompatActivity() {
                     val cornerPoints = block.cornerPoints
                     val text = block.text
                     for (line in block.lines) {
+                            bindingRecognizerDetails.tvProductDetailsTextRecognizer.text = "${bindingRecognizerDetails.tvProductDetailsTextRecognizer.text} ${line.text}\n"
                         for (element in line.elements) {
-                            bindingRecognizerDetails.tvProductDetailsTextRecognizer.text = "${bindingRecognizerDetails.tvProductDetailsTextRecognizer.text} ${element.text}"
                         }
                     }
                 }

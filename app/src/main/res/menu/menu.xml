@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/home"
-        android:title="Pomoc"
+        android:title="Strona główna"
         app:showAsAction="always" />
     <item
         android:id="@+id/barcodeButton"

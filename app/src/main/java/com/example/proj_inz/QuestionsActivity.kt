@@ -8,7 +8,6 @@ import com.example.proj_inz.databinding.ActivityQuestionsBinding
 
 import android.content.SharedPreferences
 import android.widget.Toast
-import androidx.core.view.get
 
 
 class QuestionsActivity : AppCompatActivity() {
