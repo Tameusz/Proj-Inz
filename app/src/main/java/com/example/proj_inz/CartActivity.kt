@@ -78,7 +78,7 @@ class CartActivity : AppCompatActivity() {
         progressMax(calories,forHowManyDays)
         progressTextAdjust("0/${(forHowManyDays*calories)}", "0/${(forHowManyDays*((0.15*calories)/4)).toInt()}", "0/${(forHowManyDays*((0.30*calories)/9)).toInt()}", "0/${(forHowManyDays*((0.55*calories)/4)).toInt()}", "0/${(forHowManyDays*40)}", "0/${(forHowManyDays*5)}")
     }
-    private fun calculateCalories(weight:Int,  height:Int, age:Int, sex:Int) :Int {
+    fun calculateCalories(weight:Int,  height:Int, age:Int, sex:Int) :Int {
         //for now 1 - male ,2 - female
         return if(sex == 1) {
             ((9.99*weight) + (6.25*height) - (4.92*age) + 5).toInt()
@@ -108,10 +108,10 @@ class CartActivity : AppCompatActivity() {
         val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
         val listPREF = pref.getString("listOfProductsPREF", "")
         val gson = Gson()
-        val itemType = object : TypeToken<ArrayList<Product>>() {}.type
-        val list = gson.fromJson<ArrayList<Product>>(listPREF, itemType)
+        val itemType = object : TypeToken<List<Product>>() {}.type
+        val list = gson.fromJson<List<Product>>(listPREF, itemType)
 
-        if(gson.fromJson<ArrayList<Product>>(listPREF, itemType) != null) {
+        if(gson.fromJson<List<Product>>(listPREF, itemType) != null) {
             for(listElement in list) {
                 bindingCart.shopItemList.text = "${bindingCart.shopItemList.text} \n${listElement.productName} ${listElement.productAmount}g"
                 progressAdjust(bindingCartDetails.progressBarKCAL.progress + listElement.energy100g.toInt(), bindingCartDetails.progressBarProtein.progress + listElement.proteins100g.toInt(), bindingCartDetails.progressBarFat.progress + listElement.fat100g.toInt(), bindingCartDetails.progressBarCarbohydrates.progress + listElement.carbohydrates100g.toInt(), bindingCartDetails.progressBarFiber.progress + listElement.fiber100g.toInt(), bindingCartDetails.progressBarSalt.progress + listElement.salt100g.toInt())

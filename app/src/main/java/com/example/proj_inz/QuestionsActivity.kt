@@ -25,9 +25,9 @@ class QuestionsActivity : AppCompatActivity() {
 
         binding.confirmButtonQuestions.setOnClickListener {
             if(binding.qWeight.text.toString() == ""
-                && binding.qHeight.text.toString() == ""
-                && binding.qAge.text.toString() == ""
-                && binding.radioGroup.checkedRadioButtonId == -1) {
+                || binding.qHeight.text.toString() == ""
+                || binding.qAge.text.toString() == ""
+                || binding.radioGroup.checkedRadioButtonId == -1) {
                 Toast.makeText(this, "Uzupełnij dane!!!", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(this, HelpActivity::class.java))

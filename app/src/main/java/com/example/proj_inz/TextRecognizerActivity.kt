@@ -28,12 +28,15 @@ class TextRecognizerActivity : AppCompatActivity() {
     private lateinit var bindingRecognizerDetails: TextRecognizerDetailsBinding
     private lateinit var bindingRecognizerError: TextRecognizerErrorBinding
     private var cropUriContent: Uri? = null
+    private var boolLines: Boolean = false
     val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
             // use the returned uri
             cropUriContent = result.uriContent
             bindingRecognizer.ivPhotoToRecognize.setImageURI(cropUriContent)
-            textRecognizer(InputImage.fromBitmap(bindingRecognizer.ivPhotoToRecognize.drawToBitmap(),0))
+            textRecognizer(InputImage.fromBitmap(
+                bindingRecognizer.ivPhotoToRecognize.drawToBitmap(),
+                0))
         } else {
             println(result.error)
         }
@@ -90,6 +93,11 @@ class TextRecognizerActivity : AppCompatActivity() {
         val result = recognizer.process(image)
             .addOnSuccessListener { visionText ->
                 val blocks: List<Text.TextBlock> = visionText.textBlocks
+                if(blocks.size == 0) {
+                    boolLines = true
+                } else {
+                    boolLines = false
+                }
                 for (block in visionText.textBlocks) {
                     val boundingBox = block.boundingBox
                     val cornerPoints = block.cornerPoints
@@ -107,7 +115,13 @@ class TextRecognizerActivity : AppCompatActivity() {
     }
 
     private fun buttonsFunctionality() {
-        bindingRecognizer.buttonRecognizerConfirm.setOnClickListener { setContentView(bindingRecognizerDetails.root) }
+        bindingRecognizer.buttonRecognizerConfirm.setOnClickListener {
+            if(boolLines) {
+                setContentView(bindingRecognizerError.root)
+            } else {
+                setContentView(bindingRecognizerDetails.root)
+            }
+        }
         bindingRecognizerDetails.buttonRecognizerDetailsConfirm.setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
         bindingRecognizerDetails.buttonRecognizerDetailsToRecognizer.setOnClickListener { setContentView(bindingRecognizer.root) }
         bindingRecognizerError.errorBarcodeToBarcode.setOnClickListener { startActivity(Intent(this, BarcodeReaderActivity::class.java)) }

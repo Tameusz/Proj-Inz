@@ -17,46 +17,50 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="50dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Zrób zdjęcie tabeli wartości odżywczych"
-                android:gravity="center"/>
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/ivPhotoToRecognize"
-                android:layout_width="match_parent"
-                android:layout_height="400dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Zrób zdjęcie tabeli wartości odżywczych"
+                    android:gravity="center"/>
 
-            <TextView
-                android:id="@+id/tvRecognizedText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                <ImageView
+                    android:id="@+id/ivPhotoToRecognize"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp" />
 
-            <Button
-                android:id="@+id/buttonRecognizerConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Zatwierdź"
-                android:textStyle="bold"/>
-            <Button
-                android:id="@+id/buttonRecognizerToCamera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Wybierz zdjęcie"
-                android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvRecognizedText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/buttonRecognizerConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Zatwierdź"
+                    android:textStyle="bold"/>
 
+                <Button
+                    android:id="@+id/buttonRecognizerToCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Wybierz zdjęcie"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

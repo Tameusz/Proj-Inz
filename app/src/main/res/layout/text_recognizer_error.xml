@@ -28,14 +28,14 @@
                 android:gravity="center"
                 android:textStyle="bold"/>
             <Button
-                android:id="@+id/errorBarcodeToBarcode"
+                android:id="@+id/errorBarcodeToRecognizer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Użyj rozpoznawania na innym produkcie"
                 android:textStyle="bold"/>
             <Button
-                android:id="@+id/errorBarcodeToRecognizer"
+                android:id="@+id/errorBarcodeToBarcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Użyj czytnika kodów kreskowych"

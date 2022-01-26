@@ -39,7 +39,7 @@ class BarcodeReaderActivity : AppCompatActivity() {
     private lateinit var bindingBarcode: BarcodeReaderBinding
     private lateinit var bindingBarcodeDetails: BarcodeReaderDetailsBinding
     private lateinit var bindingBarcodeError: BarcodeReaderErrorBinding
-    private lateinit var scannedCode: String
+    lateinit var scannedCode: String
     var energy100g: Float = 0.0f
     var proteins100g: Float = 0.0f
     var fat100g: Float = 0.0f
@@ -98,7 +98,9 @@ class BarcodeReaderActivity : AppCompatActivity() {
 
                     val apiResponse = "https://openfoodfacts.org/api/v0/product/$scannedCode.json"
                     val request = StringRequest(Request.Method.GET, apiResponse, { s ->
-                        if(JSONObject(s).get("status").toString().toInt()==0) { setContentView(bindingBarcodeError.root) }
+                        if(JSONObject(s).get("status").toString().toInt()==0)
+                        { setContentView(bindingBarcodeError.root)
+                        }
                         else {
                             setContentView(bindingBarcodeDetails.root)
                             response(s)
@@ -146,15 +148,16 @@ class BarcodeReaderActivity : AppCompatActivity() {
         bindingBarcodeDetails.buttonBarcodeDetailsConfirm.setOnClickListener {
             if(bindingBarcodeDetails.editTextBarcodeDetails.text.toString() == "") {
                 Toast.makeText(this, "Podaj liczbę gramów", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, CartActivity::class.java))
+                updateSharedPreferences(bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat())
             }
-            startActivity(Intent(this, CartActivity::class.java))
-            updateSharedPreferences()
         }
         bindingBarcodeDetails.buttonBarcodeDetailsToBarcode.setOnClickListener { setContentView(bindingBarcode.root) }
         bindingBarcodeError.errorBarcodeToBarcode.setOnClickListener { setContentView(bindingBarcode.root) }
         bindingBarcodeError.errorBarcodeToRecognizer.setOnClickListener { startActivity(Intent(this, TextRecognizerActivity::class.java)) }
     }
-    private fun isThereNutrimentsData(s: String, checkedNutriment: String): Boolean { return JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).has(checkedNutriment) }
+    fun isThereNutrimentsData(s: String, checkedNutriment: String): Boolean { return JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).has(checkedNutriment) }
     private fun fetchNutrimentsData(s: String, nutrimentPer100g: String): Float { return JSONObject(JSONObject(JSONObject(s).get("product").toString()).get("nutriments").toString()).get(nutrimentPer100g).toString().toFloat() }
     private fun isThereValidProductName(s: String, productName: String): Boolean { return JSONObject(JSONObject(s).get("product").toString()).has(productName) }
     private fun fetchProductName(s: String, productName: String): String { return JSONObject(JSONObject(s).get("product").toString()).get(productName).toString() }
@@ -169,19 +172,19 @@ class BarcodeReaderActivity : AppCompatActivity() {
                 "Sól: $salt\n\n\n" +
                 "Ile zamierzasz spożyć produktu w określonym czasie"
     }
-    private fun updateSharedPreferences() {
+    private fun updateSharedPreferences(howMuch: Float) {
         val gson = Gson()
         val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
         var listOfProductsPREF = pref.getString("listOfProductsPREF", "")
         val itemType = object : TypeToken<List<Product>>() {}.type
         val newProduct = Product(productName,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*energy100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*proteins100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fat100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*carbohydrates100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*fiber100g)/100,
-            (bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat()*salt100g)/100,
-            bindingBarcodeDetails.editTextBarcodeDetails.text.toString().toFloat())
+            (howMuch*energy100g)/100,
+            (howMuch*proteins100g)/100,
+            (howMuch*fat100g)/100,
+            (howMuch*carbohydrates100g)/100,
+            (howMuch*fiber100g)/100,
+            (howMuch*salt100g)/100,
+            howMuch)
         var listOfProducts = mutableListOf<Product>()
         if(gson.fromJson<List<Product>>(listOfProductsPREF, itemType) != null) {
             listOfProducts = gson.fromJson<List<Product>>(listOfProductsPREF, itemType).toMutableList()
