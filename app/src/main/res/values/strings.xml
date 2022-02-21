@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Proj-Inz</string>
     <string name="temp_text_nuritional_values">2000</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.proj_inz
+package com.example.proj_inz.activities
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.proj_inz.R
 import com.example.proj_inz.databinding.*
+import com.example.proj_inz.fragments.BMRUpdateFragment
+import com.example.proj_inz.fragments.HelpFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingMain: ActivityMainBinding
@@ -29,13 +32,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.helpButton -> {
-                val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
-                val ed: SharedPreferences.Editor = pref.edit()
-                ed.putBoolean("help_activity_executed", false)
-                ed.apply()
-                startActivity(Intent(this, HelpActivity::class.java))
-            }
+            R.id.helpButton -> { HelpFragment().show(supportFragmentManager,"helpDialog") }
+            R.id.updateBMRButton -> { BMRUpdateFragment().show(supportFragmentManager,"updateDialog")}
             R.id.homeButton -> { }
             R.id.barcodeButton -> { startActivity(Intent(this, BarcodeReaderActivity::class.java)) }
             R.id.recognizerButton -> { startActivity(Intent(this, TextRecognizerActivity::class.java)) }

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".CartActivity"
+    tools:context=".activities.CartActivity"
     android:padding="16dp"
     android:background="@drawable/background_blue">
 

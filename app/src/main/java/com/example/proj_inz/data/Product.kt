@@ -1,4 +1,4 @@
-package com.example.proj_inz
+package com.example.proj_inz.data
 
 data class Product(var productName: String,
                    var energy100g: Float,

@@ -9,6 +9,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.example.proj_inz.activities.QuestionsActivity
 import org.hamcrest.CoreMatchers.*
 import org.junit.*
 import org.junit.Assert.*

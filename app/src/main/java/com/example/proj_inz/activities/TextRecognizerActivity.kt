@@ -1,10 +1,8 @@
-package com.example.proj_inz
+package com.example.proj_inz.activities
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,9 +11,12 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.drawToBitmap
 import com.canhub.cropper.*
+import com.example.proj_inz.R
 import com.example.proj_inz.databinding.TextRecognizerBinding
 import com.example.proj_inz.databinding.TextRecognizerDetailsBinding
 import com.example.proj_inz.databinding.TextRecognizerErrorBinding
+import com.example.proj_inz.fragments.BMRUpdateFragment
+import com.example.proj_inz.fragments.HelpFragment
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -60,13 +61,8 @@ class TextRecognizerActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.helpButton -> {
-                val pref = getSharedPreferences("ApplicationPREF", Context.MODE_PRIVATE)
-                val ed: SharedPreferences.Editor = pref.edit()
-                ed.putBoolean("help_activity_executed", false)
-                ed.apply()
-                startActivity(Intent(this, HelpActivity::class.java))
-            }
+            R.id.helpButton -> { HelpFragment().show(supportFragmentManager,"helpDialog") }
+            R.id.updateBMRButton -> { BMRUpdateFragment().show(supportFragmentManager,"updateDialog")}
             R.id.homeButton -> { startActivity(Intent(this, MainActivity::class.java)) }
             R.id.barcodeButton -> { startActivity(Intent(this, BarcodeReaderActivity::class.java)) }
             R.id.recognizerButton -> { }

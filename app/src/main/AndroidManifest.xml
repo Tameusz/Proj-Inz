@@ -20,29 +20,23 @@
         android:theme="@style/Theme.ProjInz"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BarcodeReaderActivity"
+            android:name=".activities.BarcodeReaderActivity"
             android:exported="false"
             android:screenOrientation="sensorPortrait"/>
         <activity
-            android:name=".HelpActivity"
-            android:exported="false"
-            android:screenOrientation="sensorPortrait"/>
-        <activity
-            android:name=".TextRecognizerActivity"
+            android:name=".activities.TextRecognizerActivity"
             android:exported="false"
             android:screenOrientation="sensorPortrait">
-
             <meta-data
                 android:name="com.google.mlkit.vision.DEPENDENCIES"
                 android:value="ocr" />
-
         </activity>
         <activity
-            android:name=".CartActivity"
+            android:name=".activities.CartActivity"
             android:exported="false"
             android:screenOrientation="sensorPortrait"/>
         <activity
-            android:name=".QuestionsActivity"
+            android:name=".activities.QuestionsActivity"
             android:exported="true"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
@@ -52,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false"
             android:screenOrientation="sensorPortrait"/>
 

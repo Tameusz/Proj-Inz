@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-    tools:context=".HelpActivity"
-    android:background="@drawable/background_blue">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HelpFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="50dp">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Pomoc"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Witaj w aplikacji 'nazwa'. Jej celem jest zbieranie informacji na temat wartości odzywczych twoich zakupów." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Witaj w aplikacji 'nazwa'. Jej celem jest zbieranie informacji na temat wartości odzywczych twoich zakupów."/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="Skróty"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="100dp"
+                    android:layout_width="10000dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/question"/>
+                    android:src="@drawable/question" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -58,54 +55,65 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/home"/>
+                    android:src="@drawable/home" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Przycisk domku zaprowadzi cie na stronę główną aplikacji. Stąd możesz zadecydować jakiej funkcji będziesz używać. Możesz także zaznaczyć na ile dni robisz zakupy" />
+
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/barcode"/>
+                    android:src="@drawable/barcode" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Przyciśnięcie czytnika kodów kreskowych przeniesie cię do okna zajmującego się tą czynnością. Pamiętaj by kod kreskowy skanować w odpowiedni sposób - liczby powinny być na samym dole" />
+
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ocr"/>
+                    android:src="@drawable/ocr" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Podobnie do czytnika kodów ten przycisk przeniesie cię do okna z rozpoznawaniem tekstu" />
+
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/shopping_cart"/>
+                    android:src="@drawable/shopping_cart" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Naciskając na ten przycisk przeniesiesz się do swojego koszyka!" />
+
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/kcal"/>
+                    android:src="@drawable/kcal" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tutaj znajdziesz wartości odżywcze produktów które zamierzasz kupić./n Na bieżąco kontroluj stan swoich zakupów." />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pamiętaj by pozwolić aplikacji na dostęp do aparatu - jest to potrzebne do poprawnego działania aplikacji!"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20dp"
+                    android:text="Pamiętaj by pozwolić aplikacji na dostęp do aparatu - jest to potrzebne do poprawnego działania aplikacji!" />
+
                 <Button
-                    android:id="@+id/helpToMenu"
+                    android:id="@+id/helpBack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Przejdź do strony głównej"
                     android:layout_marginTop="10dp"
+                    android:text="Wróć"
                     android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>

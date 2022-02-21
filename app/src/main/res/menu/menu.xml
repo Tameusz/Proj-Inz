@@ -10,6 +10,13 @@
         android:title="Pomoc"
         app:showAsAction="always" />
     <item
+        android:id="@+id/updateBMRButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/bmi"
+        android:title="Aktualizuj zapotrzebowanie"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

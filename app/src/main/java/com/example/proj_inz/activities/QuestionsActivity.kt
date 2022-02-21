@@ -1,4 +1,4 @@
-package com.example.proj_inz
+package com.example.proj_inz.activities
 
 import android.content.Context
 import android.content.Intent
@@ -30,7 +30,7 @@ class QuestionsActivity : AppCompatActivity() {
                 || binding.radioGroup.checkedRadioButtonId == -1) {
                 Toast.makeText(this, "Uzupełnij dane!!!", Toast.LENGTH_SHORT).show()
             } else {
-                startActivity(Intent(this, HelpActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 addSharedPreferences(editor)
                 val ed: SharedPreferences.Editor = pref.edit()
                 ed.putBoolean("questions_activity_executed", true)
@@ -39,7 +39,7 @@ class QuestionsActivity : AppCompatActivity() {
         }
 
         if (pref.getBoolean("questions_activity_executed", false)) {
-            val intent = Intent(this, HelpActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

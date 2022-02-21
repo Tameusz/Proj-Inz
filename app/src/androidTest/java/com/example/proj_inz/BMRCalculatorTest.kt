@@ -9,6 +9,8 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
+import com.example.proj_inz.activities.CartActivity
+import com.example.proj_inz.activities.QuestionsActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
